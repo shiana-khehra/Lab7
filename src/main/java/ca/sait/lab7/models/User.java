@@ -1,4 +1,4 @@
-package ca.sait.lab7.models.generated;
+package ca.sait.lab7.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
