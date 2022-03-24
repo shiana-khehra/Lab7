@@ -22,30 +22,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 40)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "active")
     private boolean active;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "password")
     private String password;
     @JoinColumn(name = "role", referencedColumnName = "role_id")
@@ -59,12 +49,13 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(String email, boolean active, String firstName, String lastName, String password) {
+    public User(String email, boolean active, String firstName, String lastName, String password, Role role) {
         this.email = email;
         this.active = active;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.role = role;
     }
 
     public String getEmail() {
@@ -137,7 +128,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "ca.sait.lab7.models.generated.User[ email=" + email + " ]";
+        return "ca.sait.lab7.models.User[ email=" + email + " ]";
     }
     
 }

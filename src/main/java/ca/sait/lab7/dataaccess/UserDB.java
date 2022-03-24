@@ -40,7 +40,6 @@ public class UserDB {
         try {
             trans.begin();
             em.persist(user);
-            em.merge(user);
             trans.commit();
             
             return true;

@@ -22,12 +22,9 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
     @Column(name = "role_id")
     private Integer roleId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 25)
     @Column(name = "role_name")
     private String roleName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
@@ -92,7 +89,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "ca.sait.lab7.models.generated.Role[ roleId=" + roleId + " ]";
+        return "ca.sait.lab7.models.Role[ roleId=" + roleId + " ]";
     }
     
 }
