@@ -50,7 +50,7 @@ public class UserServlet extends HttpServlet {
          if (action != null && action.equals("delete")) {
             
             try {
-                String email = request.getParameter("email").replace(" ","+");
+                String email = request.getParameter("email");
                 userservice.delete(email);
                 users = userservice.getAll();
                 request.setAttribute("users", users);
