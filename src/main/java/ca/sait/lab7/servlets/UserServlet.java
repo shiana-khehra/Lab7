@@ -99,7 +99,16 @@ public class UserServlet extends HttpServlet {
                 String lastname = request.getParameter("lname");
             
                 String roleName = request.getParameter("role");
-                int roleId = roleservice.getRoleID(roleName);
+                
+                int roleId = 0;
+                if(roleName.equals("system admin")) {
+                    roleId = 1;
+                } else if(roleName.equals("regular user")) {
+                    roleId = 2;
+                } else if(roleName.equals("company admin")) {
+                    roleId = 3;
+                }
+                
                 Role role = new Role(roleId, roleName);
                 
                 String password = request.getParameter("passwd");
@@ -121,7 +130,16 @@ public class UserServlet extends HttpServlet {
                 String lastname = request.getParameter("lnameedit");
             
                 String roleName = request.getParameter("roleedit");
-                int roleId = roleservice.getRoleID(roleName);
+                
+                int roleId = 0;
+                if(roleName.equals("system admin")) {
+                    roleId = 1;
+                } else if(roleName.equals("regular user")) {
+                    roleId = 2;
+                } else if(roleName.equals("company admin")) {
+                    roleId = 3;
+                }
+                
                 Role role = new Role(roleId, roleName);
                 
                 boolean status = false;

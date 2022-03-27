@@ -52,7 +52,7 @@
                     <td>
                         <select name="role" id="role">
                             <c:forEach var="role" items="${roles}">
-                                <option value="${role.name}">${role.name}</option>
+                                <option value="${role.roleName}">${role.roleName}</option>
                             </c:forEach>
                         </select>
                     </td>
@@ -150,7 +150,7 @@
                     <td>
                         <select name="roleedit">
                             <c:forEach var="role" items="${roles}">
-                                <option value="${role.name}">${role.name}</option>
+                                <option value="${role.roleName}">${role.roleName}</option>
                             </c:forEach>
                         </select>
                     </td>
