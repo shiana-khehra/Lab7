@@ -3,8 +3,6 @@ package ca.sait.lab7.models;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.*;
 
 /**
  * Represents a role
@@ -13,41 +11,37 @@ import javax.xml.bind.annotation.*;
  */
 @Entity
 @Table(name = "role")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
-    @NamedQuery(name = "Role.findByRoleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId"),
-    @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
+    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")})
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @Basic
     @Column(name = "role_id")
-    private Integer roleId;
-    @Basic(optional = false)
+    private int roleId;
     @Column(name = "role_name")
     private String roleName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
+    @OneToMany
     private List<User> userList;
 
     public Role() {
     }
 
-    public Role(Integer roleId) {
+    public Role(int roleId) {
         this.roleId = roleId;
     }
 
-    public Role(Integer roleId, String roleName) {
+    public Role(int roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
     }
 
-    public Integer getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
@@ -58,39 +52,4 @@ public class Role implements Serializable {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-
-    @XmlTransient
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (roleId != null ? roleId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
-            return false;
-        }
-        Role other = (Role) object;
-        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "ca.sait.lab7.models.Role[ roleId=" + roleId + " ]";
-    }
-    
 }
