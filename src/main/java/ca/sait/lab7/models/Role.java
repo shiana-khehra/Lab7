@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.*;
 
 /**
  * Represents a role
+ * 
  * @author Shiana Khehra
  */
 @Entity

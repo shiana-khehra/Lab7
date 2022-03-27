@@ -2,51 +2,35 @@ package ca.sait.lab7.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Represents a user
+ *
  * @author Shiana Khehra
  */
 @Entity
-@Table(name = "user")
-@XmlRootElement
+@Table (name = "user")
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
-    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u from User u")
+})
 public class User implements Serializable {
-
-    private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @Column(name = "email")
+    @Basic
+    @Column
     private String email;
-    @Basic(optional = false)
-    @Column(name = "active")
+    @Column
     private boolean active;
-    @Basic(optional = false)
-    @Column(name = "first_name")
+    @Column (name = "first_name")
     private String firstName;
-    @Basic(optional = false)
-    @Column(name = "last_name")
+    @Column (name = "last_name")
     private String lastName;
-    @Basic(optional = false)
-    @Column(name = "password")
+    @Column
     private String password;
-    @JoinColumn(name = "role", referencedColumnName = "role_id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Role.class)
+    @JoinColumn(name="role", referencedColumnName="role_id")
     private Role role;
 
     public User() {
-    }
-
-    public User(String email) {
-        this.email = email;
     }
 
     public User(String email, boolean active, String firstName, String lastName, String password, Role role) {
@@ -66,7 +50,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
@@ -106,29 +90,4 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (email != null ? email.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.email == null && other.email != null) || (this.email != null && !this.email.equals(other.email))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "ca.sait.lab7.models.User[ email=" + email + " ]";
-    }
-    
 }

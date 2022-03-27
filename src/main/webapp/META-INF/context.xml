@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/">
+<Context path="/Users">
     <Resource name="jdbc/userdb" auth="Container" 
         driverClassName="org.mariadb.jdbc.Driver"
         url="jdbc:mariadb://localhost:3306/userdb" 
