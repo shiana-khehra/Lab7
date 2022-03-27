@@ -1,11 +1,6 @@
 package ca.sait.lab7.dataaccess;
 
 import ca.sait.lab7.models.User;
-import ca.sait.lab7.models.Role;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -40,6 +35,7 @@ public class UserDB {
         try {
             trans.begin();
             em.persist(user);
+            em.merge(user);
             trans.commit();
             
             return true;
@@ -77,6 +73,9 @@ public class UserDB {
         
         try {
             trans.begin();
+            Query query = em.createNamedQuery("User.softDelete", User.class);
+            query.setParameter("email", user.getEmail());
+            query.executeUpdate();
             em.remove(em.merge(user));
             trans.commit();
             
